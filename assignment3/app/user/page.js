@@ -5,9 +5,9 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { RotatingLines } from "react-loader-spinner";
 import { apiCalling } from "@/utils/api";
-// import AddPage from "@/component/newmodal/AddPage";
-// import EditModal from "@/component/edit modal/EditModal";
 import { ClipLoader } from "react-spinners";
+import EditUser from "../components/EditUser";
+import AddPage from "../components/AddUser";
 
 const Users = () => {
   const [data, setData] = useState([]);
@@ -127,16 +127,16 @@ const Users = () => {
             </div>
           </div>
 
-          {/* {addModal ? (
+          {addModal ? (
             <AddPage addModal={addModal} addToggle={addToggle} />
           ) : null}
           {editModal ? (
-            <EditModal
+            <EditUser
               userId={userId}
               editModal={editModal}
               editToggle={editToggle}
             />
-          ) : null} */}
+          ) : null}
 
           <div className=" w-11/12 text-center m-auto mt-6 flex justify-around">
             <h1 className="sm:text-3xl text-3xl text-blue-800 font-semibold">

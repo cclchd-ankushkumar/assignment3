@@ -5,4 +5,48 @@
 
 
 
+.border-container{
+    width:30rem;
+    border:1px solid rgb(216, 216, 216);
+    background-color: white;
+    border-radius: 10px;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    padding:1.5rem;
+    height:auto;
+    z-index: 500;
+}
+
+@media (max-width:500px){
+    .border-container{
+        width: 90%;
+    }
+}
+
+.input-tag{
+     padding:5px 10px;
+     font-size: medium;
+     color:rgb(86, 86, 86);
+     margin-bottom: 1rem;
+     border:1px solid rgb(205, 205, 205);
+     border-radius: 5px;
+}
+
+input:focus{
+    border:1px solid rgb(217, 13, 13);
+}
+
+label{
+    color:rgb(142, 109, 242);
+}
+
+.custom-box-shadow {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+
+  .dashboard_custom_spinner{
+    color:black;
+  }
 
