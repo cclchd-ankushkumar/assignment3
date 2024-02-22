@@ -31,7 +31,7 @@ export default function Home() {
        }else{
         alert("Login Success")
 
-        sessionStorage.setItem("token",JSON.stringify(user.token))
+        // localStorage.setItem("token",JSON.stringify(user.token))
         router.push('/user')
        }
 
