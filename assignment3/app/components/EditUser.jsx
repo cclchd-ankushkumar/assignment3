@@ -48,7 +48,16 @@ const EditUser = ({ userId, editModal, editToggle }) => {
     <div>
       {editModal && (
         <div>
-          <div className="fixed top-0 left-0 w-full h-scree bg-black z-100 "></div>
+          <div className="fixed top-0 left-0 w-full h-scree bg-black z-100 "
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "black",
+            opacity: .7,
+          }}></div>
 
           <div className="border-container">
             <div className=" text-3xl flex justify-end">

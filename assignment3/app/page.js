@@ -23,6 +23,7 @@ export default function Home() {
         { "content-Type": "application/json" },
         JSON.stringify({ email, password })
       );
+      console.log(user)
       setLoading(false);
       setEmail("");
       setPassword("");
@@ -30,6 +31,8 @@ export default function Home() {
            alert("Wrong Credentials!")
        }else{
         alert("Login Success")
+
+        sessionStorage.setItem("token",JSON.stringify(user.token))
         router.push('/user')
        }
 
@@ -40,7 +43,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white text-black flex min-h-screen flex-col items-center pt-16 sm:justify-center sm:pt-0">
+    <div className="bg-white text-blue-800 flex min-h-screen flex-col items-center pt-16 sm:justify-center sm:pt-0">
       <a href="#">
         <div className="text-foreground font-semibold text-2xl tracking-tighter mx-auto flex items-center gap-2">
           <div>
@@ -149,7 +152,7 @@ export default function Home() {
                   Register
                 </a>
                 <button
-                  className="font-semibold   hover:ring hover:ring-black transition duration-300 inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white h-10 px-4 py-2"
+                  className="font-semibold   hover:ring hover:ring-blue-800 transition duration-300 inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-800 text-white h-10 px-4 py-2"
                   type="submit"
                 >
                   {loading ? <ClipLoader color="white" size={30}/> : "Log In"}

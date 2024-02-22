@@ -8,6 +8,9 @@ import { apiCalling } from "@/utils/api";
 import { ClipLoader } from "react-spinners";
 import EditUser from "../components/EditUser";
 import AddPage from "../components/AddUser";
+import { useRouter } from "next/navigation";
+
+
 
 const Users = () => {
   const [data, setData] = useState([]);
@@ -17,6 +20,8 @@ const Users = () => {
   const [editModal, setEditModal] = useState(false);
   const [userId, setUserId] = useState("");
   const [count, setCount] = useState(0);
+  const token = JSON.parse(sessionStorage.getItem("token")) || null;
+  const router = useRouter();
 
   const getData = async () => {
     const check = await apiCalling(
@@ -47,11 +52,26 @@ const Users = () => {
     setCount(count + 1);
   };
 
+  const tokenFun = () =>{
+    if(!token){
+      // alert("Please Login First!");
+      router.push('/');
+    }
+  }
+  
+  
+
   useEffect(() => {
     getData();
+    tokenFun();
+    
+    
   }, [data]);
   return (
-    <div>
+    <>
+    {
+      token ? 
+      <div>
       <nav className="w-full h-auto bg-gradient-to-r from-blue-800 to-blue-500 py-3 flex">
         <div className="w-3/5 h-full sm:pl-10 pl-3">
           <h1 className="text-white sm:text-3xl text-2xl font-bold">
@@ -208,7 +228,11 @@ const Users = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div> :
+    null  
+    }
+    
+    </>
   );
 };
 

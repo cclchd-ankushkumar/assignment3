@@ -39,7 +39,7 @@ const AddPage = ({ addModal, addToggle }) => {
               width: "100vw",
               height: "100vh",
               backgroundColor: "black",
-              opacity: 0.5,
+              opacity: .7,
             }}
           ></div>
 
