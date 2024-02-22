@@ -20,7 +20,7 @@ const Users = () => {
   const [editModal, setEditModal] = useState(false);
   const [userId, setUserId] = useState("");
   const [count, setCount] = useState(0);
-  // const token = localStorage.getItem("token") || null;
+  const token = localStorage.getItem("token") || null;
   const router = useRouter();
 
   const getData = async () => {
@@ -52,25 +52,25 @@ const Users = () => {
     setCount(count + 1);
   };
 
-  // const tokenFun = () =>{
-  //   if(!token){
-  //     // alert("Please Login First!");
-  //     router.push('/');
-  //   }
-  // }
+  const tokenFun = () =>{
+    if(!token){
+      // alert("Please Login First!");
+      router.push('/');
+    }
+  }
   
   
 
   useEffect(() => {
     getData();
-    // tokenFun();
+    tokenFun();
     
     
   }, [data]);
   return (
     <>
-    {/* {
-      token ?  */}
+    {
+      token ? 
       <div>
       <nav className="w-full h-auto bg-gradient-to-r from-blue-800 to-blue-500 py-3 flex">
         <div className="w-3/5 h-full sm:pl-10 pl-3">
@@ -229,10 +229,9 @@ const Users = () => {
         </div>
       </div>
     </div> 
-    {/* :
+    :
     null  
-    } */}
-    
+    }
     </>
   );
 };

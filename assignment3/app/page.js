@@ -22,7 +22,7 @@ export default function Home() {
         { "content-Type": "application/json" },
         JSON.stringify({ email, password })
       );
-      console.log(user)
+      // console.log(user)
       setLoading(false);
       setEmail("");
       setPassword("");
@@ -31,7 +31,7 @@ export default function Home() {
        }else{
         alert("Login Success")
 
-        // localStorage.setItem("token",JSON.stringify(user.token))
+        localStorage.setItem("token",JSON.stringify(user.token))
         router.push('/user')
        }
 
