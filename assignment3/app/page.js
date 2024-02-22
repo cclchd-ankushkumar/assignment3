@@ -1,6 +1,5 @@
 'use client'
 import { apiCalling } from "@/utils/api";
-import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ClipLoader } from "react-spinners";

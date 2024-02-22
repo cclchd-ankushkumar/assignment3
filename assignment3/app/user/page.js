@@ -20,7 +20,7 @@ const Users = () => {
   const [editModal, setEditModal] = useState(false);
   const [userId, setUserId] = useState("");
   const [count, setCount] = useState(0);
-  const token = JSON.parse(sessionStorage.getItem("token")) || null;
+  const token = sessionStorage.getItem("token") || null;
   const router = useRouter();
 
   const getData = async () => {
