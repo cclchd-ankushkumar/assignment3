@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { apiCalling } from "@/utils/api";
 
-const EditUser = ({ userId, editModal, editToggle }) => {
+const EditUser = ({ userId, editModal, editToggle, getData }) => {
   const [firstName, setFirstName] = useState("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
@@ -28,16 +28,19 @@ const EditUser = ({ userId, editModal, editToggle }) => {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    console.log("ankush");
-    const editPost = await apiCalling(
-      `https://users-data-yzda.onrender.com/user/${userId}`,
-      "PATCH",
-      { "Content-type": "application/json" },
-      JSON.stringify(obj)
-    );
-    editToggle();
-    alert(`User with Id ${editPost.id} Edited successfully!`);
-    console.log("data");
+    try {
+      const editPost = await apiCalling(
+        `https://users-data-yzda.onrender.com/user/${userId}`,
+        "PATCH",
+        { "Content-type": "application/json" },
+        JSON.stringify(obj)
+      );
+      editToggle();
+      getData();
+      alert(`User with Id ${editPost.id} Edited successfully!`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -48,16 +51,18 @@ const EditUser = ({ userId, editModal, editToggle }) => {
     <div>
       {editModal && (
         <div>
-          <div className="fixed top-0 left-0 w-full h-scree bg-black z-100 "
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "black",
-            opacity: .7,
-          }}></div>
+          <div
+            className="fixed top-0 left-0 w-full h-scree bg-black z-100 "
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+              backgroundColor: "black",
+              opacity: 0.7,
+            }}
+          ></div>
 
           <div className="border-container">
             <div className=" text-3xl flex justify-end">

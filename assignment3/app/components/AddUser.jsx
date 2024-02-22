@@ -4,7 +4,7 @@ import { apiCalling } from "@/utils/api";
 import React, { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 
-const AddPage = ({ addModal, addToggle }) => {
+const AddPage = ({ addModal, addToggle, getData }) => {
   const [firstName, setFirstName] = useState("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
@@ -15,16 +15,19 @@ const AddPage = ({ addModal, addToggle }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("ankush");
-    const newUser = apiCalling(
-      "https://users-data-yzda.onrender.com/user",
-      "POST",
-      { "Content-type": "application/json" },
-      JSON.stringify(obj)
-    );
-    addToggle();
-    alert("New user Added Successfully");
-    console.log(newUser);
+    try {
+      const newUser = apiCalling(
+        "https://users-data-yzda.onrender.com/user",
+        "POST",
+        { "Content-type": "application/json" },
+        JSON.stringify(obj)
+      );
+      addToggle();
+      alert("New user Added Successfully");
+      getData();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -39,7 +42,7 @@ const AddPage = ({ addModal, addToggle }) => {
               width: "100vw",
               height: "100vh",
               backgroundColor: "black",
-              opacity: .7,
+              opacity: 0.7,
             }}
           ></div>
 

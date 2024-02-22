@@ -1,20 +1,18 @@
-'use client'
+"use client";
 import { apiCalling } from "@/utils/api";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { ClipLoader } from "react-spinners";
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(email,password)
-      setLoading(true);
+    setLoading(true);
     try {
       const user = await apiCalling(
         "https://reqres.in/api/login",
@@ -22,22 +20,17 @@ export default function Home() {
         { "content-Type": "application/json" },
         JSON.stringify({ email, password })
       );
-      // console.log(user)
       setLoading(false);
       setEmail("");
       setPassword("");
-       if(user.error=="user not found"){
-           alert("Wrong Credentials!")
-       }else{
-        alert("Login Success")
-
-        localStorage.setItem("token",JSON.stringify(user.token))
-        router.push('/user')
-       }
-
-      
+      if (user.error == "user not found") {
+        alert("Wrong Credentials!");
+      } else {
+        router.push("/user");
+        alert("Login Success");
+      }
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
   };
 
@@ -154,7 +147,7 @@ export default function Home() {
                   className="font-semibold   hover:ring hover:ring-blue-800 transition duration-300 inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-800 text-white h-10 px-4 py-2"
                   type="submit"
                 >
-                  {loading ? <ClipLoader color="white" size={30}/> : "Log In"}
+                  {loading ? <ClipLoader color="white" size={30} /> : "Log In"}
                 </button>
               </div>
             </form>
