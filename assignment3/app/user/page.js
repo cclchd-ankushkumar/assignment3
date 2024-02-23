@@ -9,6 +9,7 @@ import { ClipLoader } from "react-spinners";
 import EditUser from "../components/EditUser";
 import AddPage from "../components/AddUser";
 import { useRouter } from "next/navigation";
+import { useCookies } from "react-cookie";
 
 const Users = () => {
   const [data, setData] = useState([]);
@@ -18,7 +19,9 @@ const Users = () => {
   const [editModal, setEditModal] = useState(false);
   const [userId, setUserId] = useState("");
   const [count, setCount] = useState(0);
-
+  const [cookies] = useCookies(["token"]);
+  const router = useRouter();
+  const [token, setToken] = useState(null);
 
   const getData = async () => {
     try {
@@ -26,17 +29,28 @@ const Users = () => {
         "https://users-data-yzda.onrender.com/user",
         "GET"
       );
-      setData(check);
+      setData(check.reverse());
       setLoader(true);
     } catch (err) {
       console.log(err);
     }
   };
 
+  useEffect(() => {
+    getData();
+    setToken(cookies.token);
+    if (!cookies.token) {
+      alert("Please Login first");
+      // console.log("ankush useffect");
+      router.push("/");
+    }
+  }, []);
+
   const editToggle = (id) => {
     setEditModal(!editModal);
     setUserId(id);
   };
+  // console.log("ankush edit")
 
   const handleDelete = async (id) => {
     try {
@@ -56,13 +70,9 @@ const Users = () => {
     }
   };
 
-
-  useEffect(() => {
-    getData();
-  }, []);
-
   return (
-    <>
+    <div>
+      {token ? (
         <div>
           <nav className="w-full h-auto bg-gradient-to-r from-blue-800 to-blue-500 py-3 flex">
             <div className="w-3/5 h-full sm:pl-10 pl-3">
@@ -230,7 +240,8 @@ const Users = () => {
             </div>
           </div>
         </div>
-    </>
+      ) : null}
+    </div>
   );
 };
 
