@@ -19,7 +19,8 @@ const Users = () => {
   const [editModal, setEditModal] = useState(false);
   const [userId, setUserId] = useState("");
   const [count, setCount] = useState(0);
-  const [cookies] = useCookies(["token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [logout, setLogout] = useState(true);
   const router = useRouter();
   const [token, setToken] = useState(null);
 
@@ -70,6 +71,17 @@ const Users = () => {
     }
   };
 
+  const handleLogout = () => {
+    console.log("delete logout");
+    removeCookie("token");
+    router.push('/')
+    alert("Logout Successfull")
+  };
+
+  // useEffect(() => {
+
+  // }, [logout]);
+
   return (
     <div>
       {token ? (
@@ -83,10 +95,12 @@ const Users = () => {
 
             <div className="w-2/5 text-white h-auto pr-5 flex justify-end">
               <div className="w-24 h-full flex items-center justify-around">
-                <p>Search </p>
-                <p>
-                  <FaSearch />
-                </p>
+                <button
+                  className="border border-white px-2 py-1 rounded-md font-semibold hover:border-2"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
               </div>
             </div>
           </nav>
